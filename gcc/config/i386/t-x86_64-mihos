@@ -1,0 +1,3 @@
+# A libgcc variant without the red zone, for the kernel (interrupts write below rsp)
+MULTILIB_OPTIONS += mno-red-zone
+MULTILIB_DIRNAMES += no-red-zone
