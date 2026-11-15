@@ -380,12 +380,6 @@ case ${host} in
 i[34567]86-*-mingw* | x86_64-*-mingw*)
   enable_execute_stack=config/i386/enable-execute-stack-mingw32.c
   ;;
-i[34567]86-*-mihos* | x86_64-*-mihos*)
-	# No t-libgcc-pic / t-crtstuff-pic: libgcc is also the kernel's, built with
-	# -mcmodel=kernel, which refuses -fpic (and nothing here is shared)
-	extra_parts="$extra_parts crti.o crtbegin.o crtend.o crtn.o"
-	tmake_file="$tmake_file i386/t-crtstuff"
-	;;
 i[34567]86-*-cygwin* | x86_64-*-cygwin*)
   enable_execute_stack=config/i386/enable-execute-stack-mingw32.c
   ;;
@@ -748,6 +742,12 @@ x86_64-*-darwin*)
 	;;
 i[34567]86-*-elfiamcu)
 	tmake_file="$tmake_file i386/t-crtstuff t-softfp-sfdftf i386/32/t-softfp i386/32/t-iamcu i386/t-softfp t-softfp t-dfprules"
+	;;
+i[34567]86-*-mihos* | x86_64-*-mihos*)
+	# No t-libgcc-pic / t-crtstuff-pic: libgcc is also the kernel's, built with
+	# -mcmodel=kernel, which refuses -fpic (and nothing here is shared)
+	extra_parts="$extra_parts crti.o crtbegin.o crtend.o crtn.o"
+	tmake_file="$tmake_file i386/t-crtstuff"
 	;;
 i[34567]86-*-elf*)
 	tmake_file="$tmake_file i386/t-crtstuff t-crtstuff-pic t-libgcc-pic"
