@@ -44,7 +44,6 @@
 #include "tm.h"
 #include "libgcc_tm.h"
 #include "gcov.h"
-#include <stdint.h>
 
 #if HAVE_SYS_MMAN_H
 #include <sys/mman.h>
