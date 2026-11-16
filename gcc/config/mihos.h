@@ -15,6 +15,11 @@
 #undef ENDFILE_SPEC
 #define ENDFILE_SPEC "crtend.o%s crtn.o%s"
 
+/* C++ sees the GNU extensions of the C library's headers, as on Linux
+   (gnu-user.h): mlibc's own C++ code and libstdc++ expect them. */
+#undef CPLUSPLUS_CPP_SPEC
+#define CPLUSPLUS_CPP_SPEC "-D_GNU_SOURCE %(cpp)"
+
 /* Predefined macros. */
 #undef TARGET_OS_CPP_BUILTINS
 #define TARGET_OS_CPP_BUILTINS()      \
