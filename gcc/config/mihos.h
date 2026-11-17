@@ -6,10 +6,10 @@
 #undef LIB_SPEC
 #define LIB_SPEC "-lc"
 
-/* Linked before user code (%s: look in the library directories). crt0.o is
-   our libc's entry point until mlibc replaces it (crt1.o). */
+/* Linked before user code (%s: look in the library directories). crt1.o is
+   mlibc's entry point (_start), as glibc's on Linux. */
 #undef STARTFILE_SPEC
-#define STARTFILE_SPEC "crt0.o%s crti.o%s crtbegin.o%s"
+#define STARTFILE_SPEC "crt1.o%s crti.o%s crtbegin.o%s"
 
 /* Linked after user code. */
 #undef ENDFILE_SPEC
