@@ -6,10 +6,21 @@ AC_DEFUN([GLIBCXX_CROSSCONFIG],[
 # Base decisions on target environment.
 case "${host}" in
   *-mihos*)
+    # The C library is mlibc: Linux's checks, run against it (the sysroot
+    # holds its libc.a when libstdc++ is built). No /dev/urandom yet, so no
+    # _GLIBCXX_USE_DEV_RANDOM: std::random_device uses the CPU's rdrand.
     GLIBCXX_CHECK_COMPILER_FEATURES
     GLIBCXX_CHECK_LINKER_FEATURES
     GLIBCXX_CHECK_MATH_SUPPORT
     GLIBCXX_CHECK_STDLIB_SUPPORT
+    GCC_CHECK_TLS
+    AC_CHECK_FUNCS(__cxa_thread_atexit_impl)
+    AC_CHECK_FUNCS(aligned_alloc posix_memalign memalign _aligned_malloc)
+    AC_CHECK_FUNCS(timespec_get)
+    AC_CHECK_FUNCS(sockatmark)
+    AC_CHECK_FUNCS(uselocale)
+    AC_CHECK_FUNCS(secure_getenv)
+    AM_ICONV
     ;;
   arm*-*-symbianelf*)
     # This is a freestanding configuration; there is nothing to do here.
