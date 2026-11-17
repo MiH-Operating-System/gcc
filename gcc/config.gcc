@@ -781,6 +781,10 @@ case ${target} in
   gnu_ld=yes
   default_use_cxa_atexit=yes
   use_gcc_stdint=wrap
+  # mlibc runs .init_array and never calls _init in a static program, so
+  # crtbegin.o must register its frames (frame_dummy) through .init_array,
+  # as on Linux. Configure cannot always detect it when cross-compiling.
+  gcc_cv_initfini_array=yes
   ;;
 *-*-darwin*)
   tmake_file="t-darwin "
